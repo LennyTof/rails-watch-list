@@ -1,0 +1,18 @@
+<h1><%= @list.name %></h1>
+<div class="cards">
+<% @movies.each do |movie| %>
+  <div class="card-category " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= movie.poster_url%>)">
+    <%= movie.title %>
+  </div>
+  <p><%= movie.overview %></p>
+  <% movie.bookmarks.each do |bookmark| %>
+    <%= bookmark.comment %>
+        <%= link_to "Delete this bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+  <% end %>
+<% end %>
+</div>
+
+<div>
+<%= link_to 'Add a movie', new_list_bookmark_path(params[:id]) %>
+<%= link_to 'Go back to your lists', lists_path %>
+</div>
